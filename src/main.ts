@@ -1,8 +1,7 @@
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
-import { SwaggerModule, DocumentBuilder, OpenAPIObject } from '@nestjs/swagger';
-import { INestApplication } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 function buildDocsConfig(): Omit<OpenAPIObject, 'paths'> {
   const config = new DocumentBuilder()
@@ -18,17 +17,16 @@ function buildDocsConfig(): Omit<OpenAPIObject, 'paths'> {
 function setupDocs(app: INestApplication): void {
   const documentConfig = buildDocsConfig();
   const document = SwaggerModule.createDocument(app, documentConfig);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('docs', app, document);
 }
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  const configService = app.get(ConfigService);
-  const APP_PORT = 3000;
+  app.useGlobalPipes(new ValidationPipe());
 
   setupDocs(app);
 
+  const APP_PORT = 3000;
   await app.listen(APP_PORT);
 }
 
