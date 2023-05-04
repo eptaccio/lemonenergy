@@ -17,4 +17,9 @@ export class ProspectEligibilityResponseDto {
     uniqueItems: true,
   })
   public readonly razoesDeInelegibilidade?: ReasonForIneligibilityEnum[];
+
+  @ApiProperty({
+    description: 'Year CO2 saving projection',
+  })
+  public readonly economiaAnualDeCO2?: number
 }

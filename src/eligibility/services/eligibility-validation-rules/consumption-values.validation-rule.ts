@@ -7,9 +7,17 @@ import {
 } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
+import { ConsumptionCalcsHelper } from '../../helpers/consumption-calcs.helper';
  
 @Injectable()
 export class ConsumptionValuesValidationRule extends BaseValidationRule {
+  
+  constructor(
+    private readonly calcHelper: ConsumptionCalcsHelper
+  ) {
+    super();
+  }
+
   private readonly MIN_AVG_CONSUMPTION_FOR_CONNECTION_TYPE: Map<
     ConnectionTypeEnum,
     number
@@ -19,7 +27,7 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
     [ConnectionTypeEnum.TRIFASICO, 750],
   ]);
 
-  async validate(
+  public async validate(
     prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
     const minAvgValue = this.MIN_AVG_CONSUMPTION_FOR_CONNECTION_TYPE.get(
@@ -40,19 +48,11 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
     );
   }
 
-  private calculateAverageConsumption(
-    consumptionHistory: number[],
-  ) {
-    const sum = consumptionHistory.reduce((prev, curr) => prev + curr);
-    const avg = sum / consumptionHistory.length || 0;
-    return avg;
-  }
-
   private isValidConsumption(
     consumptionHistory: number[],
     minAverageConsumptionValue: number,
   ) {
-    const avg = this.calculateAverageConsumption(consumptionHistory);
+    const avg = this.calcHelper.calcAverageConsumption(consumptionHistory);
     return avg > minAverageConsumptionValue;
   }
 }

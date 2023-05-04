@@ -4,12 +4,14 @@ import { ProspectEligibilityRequestDto } from '../dto/prospect-eligibility-calc-
 import { EligibilityRulesValidatorService } from './eligibility-rules-validator.service';
 import { ValidationRuleResult } from '../interfaces/rule-validator.interface';
 import { ReasonForIneligibilityEnum } from '../constants/reason-for-ineligibility.enum';
+import { ConsumptionCalcsHelper } from '../helpers/consumption-calcs.helper';
 
 @Injectable()
 export class EligibilityService {
   constructor(
-    public readonly eligibilityRulesValidatorService: EligibilityRulesValidatorService,
-  ) {}
+    private readonly eligibilityRulesValidatorService: EligibilityRulesValidatorService,
+    private readonly calcHelper: ConsumptionCalcsHelper
+  ) { }
 
   public async analyzeProspect(
     prospectInfo: ProspectEligibilityRequestDto,
@@ -21,6 +23,7 @@ export class EligibilityService {
     if (isClientEligible) {
       return {
         elegivel: true,
+        economiaAnualDeCO2: this.calculateCo2SavingProjection(prospectInfo.historicoDeConsumo)
       };
     }
 
@@ -44,5 +47,12 @@ export class EligibilityService {
     return validationResults.every(
       (result: ValidationRuleResult) => result.isValid === true,
     );
+  }
+
+  private calculateCo2SavingProjection(consumptionHistory: number[]): number {
+    const avgConsumption = this.calcHelper
+      .calcAverageConsumption(consumptionHistory);
+
+    return this.calcHelper.calcCO2AnnualSaving(avgConsumption)
   }
 }
