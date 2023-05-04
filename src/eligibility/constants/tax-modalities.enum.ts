@@ -1,6 +1,6 @@
-export enum TaxModalitiesEnum {
-  AZUL = 'azul',
+export enum TariffModalitiesEnum {
   BRANCA = 'branca',
-  VERDE = 'verde',
   CONVENCIONAL = 'convencional',
+  AZUL = 'azul',
+  VERDE = 'verde',
 }

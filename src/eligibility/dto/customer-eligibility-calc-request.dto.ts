@@ -13,7 +13,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { ConnectionTypesEnum } from '../constants/connection-types.enum';
 import { ConsumerClassEnum } from '../constants/consumer-class.enum';
-import { TaxModalitiesEnum } from '../constants/tax-modalities.enum';
+import { TariffModalitiesEnum } from '../constants/tax-modalities.enum';
 
 const CPF_CNPJ_DOCUMENT_VALIDATION_EXPRESSION = /^(\d{11}|\d{14})$/;
 
@@ -64,11 +64,11 @@ export class CustomerEligibilityRequestDto {
 
   @ApiProperty({
     description: 'The actual costs of generating electricity',
-    enum: TaxModalitiesEnum,
+    enum: TariffModalitiesEnum,
   })
   @IsDefined()
-  @IsEnum(TaxModalitiesEnum)
-  public readonly modalidadeTarifaria: TaxModalitiesEnum;
+  @IsEnum(TariffModalitiesEnum)
+  public readonly modalidadeTarifaria: TariffModalitiesEnum;
 
   @ApiProperty({
     description: 'Customer consumption history',
