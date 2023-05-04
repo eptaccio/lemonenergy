@@ -1,21 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import {
-  IValidationRule,
   ValidationRuleResult,
 } from '../../interfaces/rule-validator.interface';
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
-import { TariffModalitiesEnum } from '../../constants/tariff-modalities.enum';
+import { TariffModalityEnum } from '../../constants/tariff-modality.enum';
 import { BaseValidationRule } from './abstract-base-validation-rule';
 
 @Injectable()
 export class TariffModalityValidationRule extends BaseValidationRule {
-  async validate(
+  public async validate(
     prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
     const validTariffModalities = [
-      TariffModalitiesEnum.CONVENCIONAL,
-      TariffModalitiesEnum.BRANCA,
+      TariffModalityEnum.CONVENCIONAL,
+      TariffModalityEnum.BRANCA,
     ];
 
     const isValidTariffModality  = validTariffModalities.includes(

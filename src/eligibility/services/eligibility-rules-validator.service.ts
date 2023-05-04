@@ -18,11 +18,14 @@ export class EligibilityRulesValidatorService {
   public async validateAll(
     prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult[]> {
-    const validationRules = ValidationRules.map((rule) =>
-      this.moduleRef.get<BaseValidationRule>(rule),
-    );
-
+    const validationRules = this.getRules();
     return this.verifyRules(prospectInfo, validationRules);
+  }
+
+  private getRules() {
+    return ValidationRules.map(
+      (rule) => this.moduleRef.get<BaseValidationRule>(rule)
+    );
   }
 
   private async verifyRules(

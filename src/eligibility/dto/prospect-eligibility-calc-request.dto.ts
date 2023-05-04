@@ -6,7 +6,7 @@ import {
 } from 'class-validator';
 import { ConnectionTypeEnum } from '../constants/connection-type.enum';
 import { TariffClassEnum } from '../constants/tariff-class.enum';
-import { TariffModalitiesEnum } from '../constants/tariff-modalities.enum';
+import { TariffModalityEnum } from '../constants/tariff-modality.enum';
 
 const CPF_CNPJ_DOCUMENT_VALIDATION_EXPRESSION = /^(\d{11}|\d{14})$/;
 
@@ -49,11 +49,11 @@ export class ProspectEligibilityRequestDto {
 
   @ApiProperty({
     description: 'The actual costs of generating electricity',
-    enum: TariffModalitiesEnum,
+    enum: TariffModalityEnum,
   })
   @IsDefined()
-  @IsEnum(TariffModalitiesEnum)
-  public readonly modalidadeTarifaria: TariffModalitiesEnum;
+  @IsEnum(TariffModalityEnum)
+  public readonly modalidadeTarifaria: TariffModalityEnum;
 
   @ApiProperty({
     description: 'Prospect consumption history',

@@ -1,11 +1,11 @@
 import { Test } from '@nestjs/testing';
 import { TariffModalityValidationRule } from './tariff-modality.validation-rule';
-import { TariffModalitiesEnum } from '../../constants/tariff-modalities.enum';
+import { TariffModalityEnum } from '../../constants/tariff-modality.enum';
 import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 
 function buildDto(
-  tariffModality : TariffModalitiesEnum,
+  tariffModality : TariffModalityEnum,
 ): ProspectEligibilityRequestDto {
   return {
     modalidadeTarifaria: tariffModality ,
@@ -28,8 +28,8 @@ describe('TariffModalityValidationRule', () => {
   describe('when validating tariff modality (modalidate tarifaria)', () => {
     describe('with valid tariff modalities', () => {
       const validTariffModalities = [
-        TariffModalitiesEnum.CONVENCIONAL,
-        TariffModalitiesEnum.BRANCA
+        TariffModalityEnum.CONVENCIONAL,
+        TariffModalityEnum.BRANCA
       ];
 
       it('should be valid', async () => {
@@ -45,8 +45,8 @@ describe('TariffModalityValidationRule', () => {
 
     describe('with invalid tariff modalities', () => {
       const validTariffModalities = [
-        TariffModalitiesEnum.AZUL,
-        TariffModalitiesEnum.VERDE,
+        TariffModalityEnum.AZUL,
+        TariffModalityEnum.VERDE,
       ];
 
       it('should be invalid', async () => {

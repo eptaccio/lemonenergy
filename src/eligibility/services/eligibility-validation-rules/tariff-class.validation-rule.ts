@@ -7,7 +7,7 @@ import { BaseValidationRule } from './abstract-base-validation-rule';
 
 @Injectable()
 export class TariffClassValidationRule extends BaseValidationRule {
-  async validate(
+  public async validate(
     prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
     const validTariffClasses = [
