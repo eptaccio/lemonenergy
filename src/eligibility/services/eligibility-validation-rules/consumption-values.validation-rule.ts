@@ -3,15 +3,14 @@ import { Injectable } from '@nestjs/common';
 import { BaseValidationRule } from './abstract-base-validation-rule';
 import { ConnectionTypesEnum } from '../../constants/connection-types.enum';
 import {
-  ConsumptionHistoryDto,
   CustomerEligibilityRequestDto,
 } from '../../dto/customer-eligibility-calc-request.dto';
 import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
 import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
-
+ 
 @Injectable()
 export class ConsumptionValuesValidationRule extends BaseValidationRule {
-  private readonly MIN_AVG_IN_kWh_FOR_CONNECTION_TYPE_MAPPING: Map<
+  private readonly MIN_AVG_CONSUMPTION_FOR_CONNECTION_TYPE: Map<
     ConnectionTypesEnum,
     number
   > = new Map([
@@ -23,12 +22,9 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
   async validate(
     customerInfo: CustomerEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
-    const minAvgValue = this.MIN_AVG_IN_kWh_FOR_CONNECTION_TYPE_MAPPING.get(
+    const minAvgValue = this.MIN_AVG_CONSUMPTION_FOR_CONNECTION_TYPE.get(
       customerInfo.tipoDeConexao,
     );
-    if (!minAvgValue) {
-      throw new Error('value not expected');
-    }
 
     const isValidConsumption = this.isValidConsumption(
       customerInfo.historicoDeConsumo,
@@ -45,15 +41,15 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
   }
 
   private calculateAverageConsumption(
-    consumptionHistory: ConsumptionHistoryDto,
+    consumptionHistory: number[],
   ) {
-    const sum = consumptionHistory.items.reduce((prev, curr) => prev + curr);
-    const avg = sum / consumptionHistory.items.length || 0;
+    const sum = consumptionHistory.reduce((prev, curr) => prev + curr);
+    const avg = sum / consumptionHistory.length || 0;
     return avg;
   }
 
   private isValidConsumption(
-    consumptionHistory: ConsumptionHistoryDto,
+    consumptionHistory: number[],
     minAverageConsumptionValue: number,
   ) {
     const avg = this.calculateAverageConsumption(consumptionHistory);

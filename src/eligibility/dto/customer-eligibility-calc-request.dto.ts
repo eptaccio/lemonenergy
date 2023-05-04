@@ -1,23 +1,16 @@
-import {
-  Matches,
-  IsDefined,
-  IsEnum,
-  IsInt,
-  Min,
-  Max,
-  MaxLength,
-  IsArray,
-  ValidateNested,
-  MinLength,
-} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  ArrayMaxSize, ArrayMinSize, IsArray, IsDefined,
+  IsEnum,
+  IsInt, Matches, Max, Min
+} from 'class-validator';
 import { ConnectionTypesEnum } from '../constants/connection-types.enum';
 import { ConsumerClassEnum } from '../constants/consumer-class.enum';
 import { TariffModalitiesEnum } from '../constants/tax-modalities.enum';
 
 const CPF_CNPJ_DOCUMENT_VALIDATION_EXPRESSION = /^(\d{11}|\d{14})$/;
 
-const ConsumptionHistoryValidationRules = {
+const ConsumptionHistoryInputValidationRules = {
   MIN_ITEMS: 3,
   MAX_ITEMS: 12,
   MIN_VALUE: 0,
@@ -25,14 +18,6 @@ const ConsumptionHistoryValidationRules = {
 };
 
 const EACH_ITEM_VALIDATION = { each: true };
-
-export class ConsumptionHistoryDto {
-  @Min(ConsumptionHistoryValidationRules.MIN_VALUE, EACH_ITEM_VALIDATION)
-  @Max(ConsumptionHistoryValidationRules.MAX_VALUE, EACH_ITEM_VALIDATION)
-  @MaxLength(ConsumptionHistoryValidationRules.MAX_ITEMS, EACH_ITEM_VALIDATION)
-  @IsInt(EACH_ITEM_VALIDATION)
-  readonly items: number[];
-}
 
 export class CustomerEligibilityRequestDto {
   @ApiProperty({
@@ -74,17 +59,20 @@ export class CustomerEligibilityRequestDto {
     description: 'Customer consumption history',
     type: 'number',
     isArray: true,
-    minItems: ConsumptionHistoryValidationRules.MIN_ITEMS,
-    maxItems: ConsumptionHistoryValidationRules.MAX_ITEMS,
+    minItems: ConsumptionHistoryInputValidationRules.MIN_ITEMS,
+    maxItems: ConsumptionHistoryInputValidationRules.MAX_ITEMS,
     items: {
       type: 'integer',
-      minimum: ConsumptionHistoryValidationRules.MIN_VALUE,
-      maximum: ConsumptionHistoryValidationRules.MAX_VALUE,
+      minimum: ConsumptionHistoryInputValidationRules.MIN_VALUE,
+      maximum: ConsumptionHistoryInputValidationRules.MAX_VALUE,
     },
   })
+  @IsDefined()
   @IsArray()
-  @MaxLength(ConsumptionHistoryValidationRules.MAX_ITEMS)
-  @MinLength(ConsumptionHistoryValidationRules.MIN_ITEMS)
-  @ValidateNested()
-  public readonly historicoDeConsumo: ConsumptionHistoryDto;
+  @ArrayMaxSize(ConsumptionHistoryInputValidationRules.MAX_ITEMS)
+  @ArrayMinSize(ConsumptionHistoryInputValidationRules.MIN_ITEMS)
+  @IsInt(EACH_ITEM_VALIDATION)
+  @Min(ConsumptionHistoryInputValidationRules.MIN_VALUE, EACH_ITEM_VALIDATION)
+  @Max(ConsumptionHistoryInputValidationRules.MAX_VALUE, EACH_ITEM_VALIDATION)
+  public readonly historicoDeConsumo: number[];
 }
