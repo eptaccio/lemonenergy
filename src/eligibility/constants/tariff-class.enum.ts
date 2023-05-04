@@ -1,4 +1,4 @@
-export enum ConsumerClassEnum {
+export enum TariffClassEnum {
   RESIDENCIAL = 'residencial',
   INDUSTRIAL = 'industrial',
   COMERCIAL = 'comercial',

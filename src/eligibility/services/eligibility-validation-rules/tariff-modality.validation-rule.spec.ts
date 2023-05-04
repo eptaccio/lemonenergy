@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { TariffModalityValidationRule } from './tariff-modality.validation-rule';
-import { TariffModalitiesEnum } from '../../constants/tax-modalities.enum';
+import { TariffModalitiesEnum } from '../../constants/tariff-modalities.enum';
 import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
-import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
+import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 
 function buildDto(
   tariffModality : TariffModalitiesEnum,
@@ -56,7 +56,7 @@ describe('TariffModalityValidationRule', () => {
           );
           expect(result.isValid).toBeFalsy();
           expect(result.reason).toEqual(
-            ReasonsForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA
+            ReasonForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA
           );
         }
       });

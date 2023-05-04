@@ -4,8 +4,8 @@ import {
   IValidationRule,
   ValidationRuleResult,
 } from '../../interfaces/rule-validator.interface';
-import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
-import { TariffModalitiesEnum } from '../../constants/tax-modalities.enum';
+import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
+import { TariffModalitiesEnum } from '../../constants/tariff-modalities.enum';
 import { BaseValidationRule } from './abstract-base-validation-rule';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class TariffModalityValidationRule extends BaseValidationRule {
     }
 
     return this.buildInvalidResponse(
-      ReasonsForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA,
+      ReasonForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA,
     );
   }
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
+import { ReasonForIneligibilityEnum } from '../constants/reason-for-ineligibility.enum';
 
 export class ProspectEligibilityResponseDto {
   @ApiProperty({
@@ -12,9 +12,9 @@ export class ProspectEligibilityResponseDto {
     type: 'array',
     items: {
       type: 'string',
-      enum: Object.values(ReasonsForIneligibilityEnum),
+      enum: Object.values(ReasonForIneligibilityEnum),
     },
     uniqueItems: true,
   })
-  public readonly razoesDeInelegibilidade?: ReasonsForIneligibilityEnum[];
+  public readonly razoesDeInelegibilidade?: ReasonForIneligibilityEnum[];
 }

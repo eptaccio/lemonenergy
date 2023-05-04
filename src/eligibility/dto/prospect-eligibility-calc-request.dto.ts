@@ -4,9 +4,9 @@ import {
   IsEnum,
   IsInt, Matches, Max, Min
 } from 'class-validator';
-import { ConnectionTypesEnum } from '../constants/connection-types.enum';
-import { ConsumerClassEnum } from '../constants/consumer-class.enum';
-import { TariffModalitiesEnum } from '../constants/tax-modalities.enum';
+import { ConnectionTypeEnum } from '../constants/connection-type.enum';
+import { TariffClassEnum } from '../constants/tariff-class.enum';
+import { TariffModalitiesEnum } from '../constants/tariff-modalities.enum';
 
 const CPF_CNPJ_DOCUMENT_VALIDATION_EXPRESSION = /^(\d{11}|\d{14})$/;
 
@@ -32,20 +32,20 @@ export class ProspectEligibilityRequestDto {
 
   @ApiProperty({
     description: 'Electrical distribution/connection type',
-    enum: ConnectionTypesEnum,
+    enum: ConnectionTypeEnum,
   })
   @IsDefined()
-  @IsEnum(ConnectionTypesEnum)
-  public readonly tipoDeConexao: ConnectionTypesEnum;
+  @IsEnum(ConnectionTypeEnum)
+  public readonly tipoDeConexao: ConnectionTypeEnum;
 
   @ApiProperty({
     description:
       'Prospect consumer class (based at Brazilian Normative Resolution ANEEL No. 414, 2010.)',
-    enum: ConsumerClassEnum,
+    enum: TariffClassEnum,
   })
   @IsDefined()
-  @IsEnum(ConsumerClassEnum)
-  public readonly classeDeConsumo: ConsumerClassEnum;
+  @IsEnum(TariffClassEnum)
+  public readonly classeDeConsumo: TariffClassEnum;
 
   @ApiProperty({
     description: 'The actual costs of generating electricity',

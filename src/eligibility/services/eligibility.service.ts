@@ -3,7 +3,7 @@ import { ProspectEligibilityResponseDto } from '../dto/prospect-eligibility-calc
 import { ProspectEligibilityRequestDto } from '../dto/prospect-eligibility-calc-request.dto';
 import { EligibilityRulesValidatorService } from './eligibility-rules-validator.service';
 import { ValidationRuleResult } from '../interfaces/rule-validator.interface';
-import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
+import { ReasonForIneligibilityEnum } from '../constants/reason-for-ineligibility.enum';
 
 @Injectable()
 export class EligibilityService {
@@ -35,7 +35,7 @@ export class EligibilityService {
 
   private getIneligibilityReasons(
     validationResults: ValidationRuleResult[],
-  ): ReasonsForIneligibilityEnum[] {
+  ): ReasonForIneligibilityEnum[] {
     const invalidResults = validationResults.filter(result => result.isValid === false)
     return invalidResults.map((result) => result.reason);
   }

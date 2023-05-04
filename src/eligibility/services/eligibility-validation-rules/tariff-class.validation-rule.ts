@@ -1,31 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
-import { ConsumerClassEnum } from '../../constants/consumer-class.enum';
-import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
+import { TariffClassEnum } from '../../constants/tariff-class.enum';
+import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 import { BaseValidationRule } from './abstract-base-validation-rule';
 
 @Injectable()
-export class ConsumerClassValidationRule extends BaseValidationRule {
+export class TariffClassValidationRule extends BaseValidationRule {
   async validate(
     prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
-    const validConsumerClasses = [
-      ConsumerClassEnum.COMERCIAL,
-      ConsumerClassEnum.RESIDENCIAL,
-      ConsumerClassEnum.INDUSTRIAL,
+    const validTariffClasses = [
+      TariffClassEnum.COMERCIAL,
+      TariffClassEnum.RESIDENCIAL,
+      TariffClassEnum.INDUSTRIAL,
     ];
 
-    const isValidConsumerClass = validConsumerClasses.includes(
+    const isValidTariffClass = validTariffClasses.includes(
       prospectInfo.classeDeConsumo,
     );
 
-    if (isValidConsumerClass) {
+    if (isValidTariffClass) {
       return this.buildValidResponse();
     }
 
     return this.buildInvalidResponse(
-      ReasonsForIneligibilityEnum.CLASSE_DE_CONSUMO_NAO_ACEITA,
+      ReasonForIneligibilityEnum.CLASSE_DE_CONSUMO_NAO_ACEITA,
     );
   }
 }

@@ -3,7 +3,7 @@ import {
   IValidationRule,
   ValidationRuleResult,
 } from '../../interfaces/rule-validator.interface';
-import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
+import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -14,7 +14,7 @@ export abstract class BaseValidationRule implements IValidationRule {
     };
   }
 
-  protected buildInvalidResponse(reason: ReasonsForIneligibilityEnum) {
+  protected buildInvalidResponse(reason: ReasonForIneligibilityEnum) {
     return {
       isValid: false,
       reason,

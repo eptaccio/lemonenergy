@@ -1,9 +1,9 @@
-import { ConsumerClassValidationRule } from './consumer-class.validation-rule';
+import { TariffClassValidationRule } from './tariff-class.validation-rule';
 import { ConsumptionValuesValidationRule } from './consumption-values.validation-rule';
 import { TariffModalityValidationRule } from './tariff-modality.validation-rule';
 
 export const ValidationRules = [
-  ConsumerClassValidationRule,
+  TariffClassValidationRule,
   ConsumptionValuesValidationRule,
   TariffModalityValidationRule
 ];

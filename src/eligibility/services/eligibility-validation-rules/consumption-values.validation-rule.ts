@@ -1,22 +1,22 @@
 import { Injectable } from '@nestjs/common';
 
 import { BaseValidationRule } from './abstract-base-validation-rule';
-import { ConnectionTypesEnum } from '../../constants/connection-types.enum';
+import { ConnectionTypeEnum } from '../../constants/connection-type.enum';
 import {
   ProspectEligibilityRequestDto,
 } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
-import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
+import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
  
 @Injectable()
 export class ConsumptionValuesValidationRule extends BaseValidationRule {
   private readonly MIN_AVG_CONSUMPTION_FOR_CONNECTION_TYPE: Map<
-    ConnectionTypesEnum,
+    ConnectionTypeEnum,
     number
   > = new Map([
-    [ConnectionTypesEnum.MONOFASICO, 400],
-    [ConnectionTypesEnum.BIFASICO, 500],
-    [ConnectionTypesEnum.TRIFASICO, 750],
+    [ConnectionTypeEnum.MONOFASICO, 400],
+    [ConnectionTypeEnum.BIFASICO, 500],
+    [ConnectionTypeEnum.TRIFASICO, 750],
   ]);
 
   async validate(
@@ -36,7 +36,7 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
     }
 
     return this.buildInvalidResponse(
-      ReasonsForIneligibilityEnum.CONSUMO_MUITO_BAIXO_PARA_TIPO_DE_CONEXAO,
+      ReasonForIneligibilityEnum.CONSUMO_MUITO_BAIXO_PARA_TIPO_DE_CONEXAO,
     );
   }
 
