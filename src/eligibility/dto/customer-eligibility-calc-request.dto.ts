@@ -26,7 +26,7 @@ const ConsumptionHistoryValidationRules = {
 
 const EACH_ITEM_VALIDATION = { each: true };
 
-class ConsumptionHistory {
+export class ConsumptionHistoryDto {
   @Min(ConsumptionHistoryValidationRules.MIN_VALUE, EACH_ITEM_VALIDATION)
   @Max(ConsumptionHistoryValidationRules.MAX_VALUE, EACH_ITEM_VALIDATION)
   @MaxLength(ConsumptionHistoryValidationRules.MAX_ITEMS, EACH_ITEM_VALIDATION)
@@ -86,5 +86,5 @@ export class CustomerEligibilityRequestDto {
   @MaxLength(ConsumptionHistoryValidationRules.MAX_ITEMS)
   @MinLength(ConsumptionHistoryValidationRules.MIN_ITEMS)
   @ValidateNested()
-  public readonly consumptionHistory: ConsumptionHistory;
+  public readonly historicoDeConsumo: ConsumptionHistoryDto;
 }
