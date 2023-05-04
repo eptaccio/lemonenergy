@@ -15,9 +15,7 @@ export class EligibilityRulesValidatorService {
   public async validateAll(
     customerInfo: CustomerEligibilityRequestDto,
   ): Promise<ValidationRuleResult[]> {
-    const validationRules = [
-      this.consumerClassValidationRule
-    ];
+    const validationRules = [this.consumerClassValidationRule];
 
     return this.verifyRules(customerInfo, validationRules);
   }

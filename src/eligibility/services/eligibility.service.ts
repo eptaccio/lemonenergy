@@ -9,13 +9,13 @@ import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibil
 export class EligibilityService {
   constructor(
     public readonly eligibilityRulesValidatorService: EligibilityRulesValidatorService,
-  ) { }
+  ) {}
 
   public async analyzeCustomer(
     customerInfo: CustomerEligibilityRequestDto,
   ): Promise<CustomerEligibilityResponseDto> {
-    const validationResults = await this.eligibilityRulesValidatorService
-      .validateAll(customerInfo);
+    const validationResults =
+      await this.eligibilityRulesValidatorService.validateAll(customerInfo);
 
     const isClientEligible = this.canBeAClient(validationResults);
 
@@ -25,9 +25,8 @@ export class EligibilityService {
       };
     }
 
-    const ineligibilityReasons = this.getIneligibilityReasons(
-      validationResults
-    );
+    const ineligibilityReasons =
+      this.getIneligibilityReasons(validationResults);
 
     return {
       elegivel: false,
@@ -35,7 +34,9 @@ export class EligibilityService {
     };
   }
 
-  private getIneligibilityReasons(validationResults: ValidationRuleResult[]): ReasonsForIneligibilityEnum[] {
+  private getIneligibilityReasons(
+    validationResults: ValidationRuleResult[],
+  ): ReasonsForIneligibilityEnum[] {
     return validationResults.map((result) => result.reason);
   }
 

@@ -10,19 +10,20 @@ import { BaseValidationRule } from './abstract-base-validation-rule';
 
 @Injectable()
 export class TaxModalitiesValidationRule extends BaseValidationRule {
-
   async validate(
     customerInfo: CustomerEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
     const validTaxModes = [
       TaxModalitiesEnum.CONVENCIONAL,
-      TaxModalitiesEnum.BRANCA
-    ]
+      TaxModalitiesEnum.BRANCA,
+    ];
 
-    const isValidTaxMode = validTaxModes.includes(customerInfo.modalidadeTarifaria)
+    const isValidTaxMode = validTaxModes.includes(
+      customerInfo.modalidadeTarifaria,
+    );
     return this.buildResult(
       isValidTaxMode,
-      ReasonsForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA
-    )
+      ReasonsForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA,
+    );
   }
 }
