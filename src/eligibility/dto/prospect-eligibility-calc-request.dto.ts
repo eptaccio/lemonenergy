@@ -19,9 +19,9 @@ const ConsumptionHistoryInputValidationRules = {
 
 const EACH_ITEM_VALIDATION = { each: true };
 
-export class CustomerEligibilityRequestDto {
+export class ProspectEligibilityRequestDto {
   @ApiProperty({
-    description: 'Customer brazilian id (cpf or cnpj)',
+    description: 'Prospect brazilian id (cpf or cnpj)',
     required: true,
     example: '21554495008',
     enum: ['cpf', 'cnpj'],
@@ -40,7 +40,7 @@ export class CustomerEligibilityRequestDto {
 
   @ApiProperty({
     description:
-      'Costumer consumer class (based at Brazilian Normative Resolution ANEEL No. 414, 2010.)',
+      'Prospect consumer class (based at Brazilian Normative Resolution ANEEL No. 414, 2010.)',
     enum: ConsumerClassEnum,
   })
   @IsDefined()
@@ -56,7 +56,7 @@ export class CustomerEligibilityRequestDto {
   public readonly modalidadeTarifaria: TariffModalitiesEnum;
 
   @ApiProperty({
-    description: 'Customer consumption history',
+    description: 'Prospect consumption history',
     type: 'number',
     isArray: true,
     minItems: ConsumptionHistoryInputValidationRules.MIN_ITEMS,

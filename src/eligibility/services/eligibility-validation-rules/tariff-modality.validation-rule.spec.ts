@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing';
 import { TariffModalityValidationRule } from './tariff-modality.validation-rule';
 import { TariffModalitiesEnum } from '../../constants/tax-modalities.enum';
-import { CustomerEligibilityRequestDto } from '../../dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
 
 function buildDto(
   tariffModality : TariffModalitiesEnum,
-): CustomerEligibilityRequestDto {
+): ProspectEligibilityRequestDto {
   return {
     modalidadeTarifaria: tariffModality ,
-  } as CustomerEligibilityRequestDto;
+  } as ProspectEligibilityRequestDto;
 }
 
 describe('TariffModalityValidationRule', () => {

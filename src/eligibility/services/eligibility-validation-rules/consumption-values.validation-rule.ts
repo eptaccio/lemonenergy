@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { BaseValidationRule } from './abstract-base-validation-rule';
 import { ConnectionTypesEnum } from '../../constants/connection-types.enum';
 import {
-  CustomerEligibilityRequestDto,
-} from '../../dto/customer-eligibility-calc-request.dto';
+  ProspectEligibilityRequestDto,
+} from '../../dto/prospect-eligibility-calc-request.dto';
 import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
 import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
  
@@ -20,14 +20,14 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
   ]);
 
   async validate(
-    customerInfo: CustomerEligibilityRequestDto,
+    prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
     const minAvgValue = this.MIN_AVG_CONSUMPTION_FOR_CONNECTION_TYPE.get(
-      customerInfo.tipoDeConexao,
+      prospectInfo.tipoDeConexao,
     );
 
     const isValidConsumption = this.isValidConsumption(
-      customerInfo.historicoDeConsumo,
+      prospectInfo.historicoDeConsumo,
       minAvgValue,
     );
 

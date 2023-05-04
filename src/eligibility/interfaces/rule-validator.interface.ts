@@ -1,5 +1,5 @@
 import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
-import { CustomerEligibilityRequestDto } from '../dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from '../dto/prospect-eligibility-calc-request.dto';
 
 export type ValidationRuleResult = {
   isValid: boolean;
@@ -8,6 +8,6 @@ export type ValidationRuleResult = {
 
 export interface IValidationRule {
   validate(
-    customerInfo: CustomerEligibilityRequestDto,
+    prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult>;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerEligibilityRequestDto } from '../../dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import {
   IValidationRule,
   ValidationRuleResult,
@@ -11,7 +11,7 @@ import { BaseValidationRule } from './abstract-base-validation-rule';
 @Injectable()
 export class TariffModalityValidationRule extends BaseValidationRule {
   async validate(
-    customerInfo: CustomerEligibilityRequestDto,
+    prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult> {
     const validTariffModalities = [
       TariffModalitiesEnum.CONVENCIONAL,
@@ -19,7 +19,7 @@ export class TariffModalityValidationRule extends BaseValidationRule {
     ];
 
     const isValidTariffModality  = validTariffModalities.includes(
-      customerInfo.modalidadeTarifaria,
+      prospectInfo.modalidadeTarifaria,
     );
 
     if (isValidTariffModality ) {

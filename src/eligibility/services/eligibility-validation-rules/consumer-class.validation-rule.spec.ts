@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing';
-import { CustomerEligibilityRequestDto } from '../../dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ConsumerClassValidationRule } from './consumer-class.validation-rule';
 import { ConsumerClassEnum } from '../../constants/consumer-class.enum';
 import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
 
 function buildDto(
   consumerClass: ConsumerClassEnum,
-): CustomerEligibilityRequestDto {
+): ProspectEligibilityRequestDto {
   return {
     classeDeConsumo: consumerClass,
-  } as CustomerEligibilityRequestDto;
+  } as ProspectEligibilityRequestDto;
 }
 
 describe('ConsumerClassValidationRule', () => {

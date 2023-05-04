@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerEligibilityResponseDto } from '../dto/customer-eligibility-calc-response.dto';
-import { CustomerEligibilityRequestDto } from '../dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityResponseDto } from '../dto/prospect-eligibility-calc-response.dto';
+import { ProspectEligibilityRequestDto } from '../dto/prospect-eligibility-calc-request.dto';
 import { EligibilityRulesValidatorService } from './eligibility-rules-validator.service';
 import { ValidationRuleResult } from '../interfaces/rule-validator.interface';
 import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
@@ -11,11 +11,11 @@ export class EligibilityService {
     public readonly eligibilityRulesValidatorService: EligibilityRulesValidatorService,
   ) {}
 
-  public async analyzeCustomer(
-    customerInfo: CustomerEligibilityRequestDto,
-  ): Promise<CustomerEligibilityResponseDto> {
+  public async analyzeProspect(
+    prospectInfo: ProspectEligibilityRequestDto,
+  ): Promise<ProspectEligibilityResponseDto> {
     const validationResults =
-      await this.eligibilityRulesValidatorService.validateAll(customerInfo);
+      await this.eligibilityRulesValidatorService.validateAll(prospectInfo);
 
     const isClientEligible = this.canBeAClient(validationResults);
     if (isClientEligible) {

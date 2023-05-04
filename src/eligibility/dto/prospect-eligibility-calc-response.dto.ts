@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
 
-export class CustomerEligibilityResponseDto {
+export class ProspectEligibilityResponseDto {
   @ApiProperty({
     description: 'Main analysis result',
   })

@@ -1,4 +1,4 @@
-import { CustomerEligibilityRequestDto } from '../../dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import {
   IValidationRule,
   ValidationRuleResult,
@@ -22,6 +22,6 @@ export abstract class BaseValidationRule implements IValidationRule {
   }
 
   abstract validate(
-    customerInfo: CustomerEligibilityRequestDto,
+    prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult>;
 }

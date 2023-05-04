@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CustomerEligibilityRequestDto } from './dto/customer-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from './dto/prospect-eligibility-calc-request.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CustomerEligibilityResponseDto } from './dto/customer-eligibility-calc-response.dto';
+import { ProspectEligibilityResponseDto } from './dto/prospect-eligibility-calc-response.dto';
 import { EligibilityService } from './services/eligibility.service';
 
 @ApiTags('Eligibility')
@@ -10,19 +10,20 @@ export class EligibilityController {
   constructor(private readonly eligibilityService: EligibilityService) {}
 
   @ApiOperation({
-    summary: 'Calculate eligibility'
+    summary: 'Analyze prospect eligibility',
+    description: 'Analyze prospect eligibility based at electric bill information'
   })
-  @ApiBody({ type: CustomerEligibilityRequestDto })
+  @ApiBody({ type: ProspectEligibilityRequestDto })
   @ApiResponse({
     status: 200,
     description: 'Ok',
-    type: CustomerEligibilityResponseDto,
+    type: ProspectEligibilityResponseDto,
   })
-  @Post('/calculate')
+  @Post('/analyze')
   public async calculateEligibility(
-    @Body() customerInfo: CustomerEligibilityRequestDto,
-  ): Promise<CustomerEligibilityResponseDto> {
-    const result = await this.eligibilityService.analyzeCustomer(customerInfo);
+    @Body() prospectInfo: ProspectEligibilityRequestDto,
+  ): Promise<ProspectEligibilityResponseDto> {
+    const result = await this.eligibilityService.analyzeProspect(prospectInfo);
     return result;
   }
 }
