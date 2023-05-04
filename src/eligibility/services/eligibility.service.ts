@@ -18,7 +18,6 @@ export class EligibilityService {
       await this.eligibilityRulesValidatorService.validateAll(customerInfo);
 
     const isClientEligible = this.canBeAClient(validationResults);
-
     if (isClientEligible) {
       return {
         elegivel: true,
@@ -37,7 +36,8 @@ export class EligibilityService {
   private getIneligibilityReasons(
     validationResults: ValidationRuleResult[],
   ): ReasonsForIneligibilityEnum[] {
-    return validationResults.map((result) => result.reason);
+    const invalidResults = validationResults.filter(result => result.isValid === false)
+    return invalidResults.map((result) => result.reason);
   }
 
   private canBeAClient(validationResults: ValidationRuleResult[]): boolean {

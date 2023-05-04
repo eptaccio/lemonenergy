@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
 import { CustomerEligibilityRequestDto } from '../../dto/customer-eligibility-calc-request.dto';
 import {
   IValidationRule,
   ValidationRuleResult,
 } from '../../interfaces/rule-validator.interface';
 import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export abstract class BaseValidationRule implements IValidationRule {

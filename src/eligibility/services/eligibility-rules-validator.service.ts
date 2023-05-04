@@ -1,28 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { CustomerEligibilityRequestDto } from '../dto/customer-eligibility-calc-request.dto';
-import { ConsumerClassValidationRule } from '../validation-rules/consumer-class.validation-rule';
+
 import {
   IValidationRule,
-  ValidationRuleResult,
+  ValidationRuleResult
 } from '../interfaces/rule-validator.interface';
+
+import {
+  ValidationRules
+} from './eligibility-validation-rules';
+import { BaseValidationRule } from './eligibility-validation-rules/abstract-base-validation-rule';
 
 @Injectable()
 export class EligibilityRulesValidatorService {
-  constructor(
-    public readonly consumerClassValidationRule: ConsumerClassValidationRule,
-  ) {}
+  constructor(private readonly moduleRef: ModuleRef) { }
 
   public async validateAll(
     customerInfo: CustomerEligibilityRequestDto,
   ): Promise<ValidationRuleResult[]> {
-    const validationRules = [this.consumerClassValidationRule];
+    const validationRules = ValidationRules.map((rule) =>
+      this.moduleRef.get<BaseValidationRule>(rule),
+    );
 
     return this.verifyRules(customerInfo, validationRules);
   }
 
   private async verifyRules(
     customerInfo: CustomerEligibilityRequestDto,
-    rules: IValidationRule[],
+    rules: BaseValidationRule[],
   ): Promise<ValidationRuleResult[]> {
     const pendingValidations = rules.map((rule) => rule.validate(customerInfo));
     const validationResults = await Promise.all(pendingValidations);
