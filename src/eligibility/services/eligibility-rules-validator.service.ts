@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerEligibilityResponseDto } from '../dto/customer-eligibility-calc-response.dto';
 import { CustomerEligibilityRequestDto } from '../dto/customer-eligibility-calc-request.dto';
 import { ConsumerClassValidationRule } from '../validation-rules/consumer-class.validation-rule';
 import {
@@ -16,7 +15,10 @@ export class EligibilityRulesValidatorService {
   public async validateAll(
     customerInfo: CustomerEligibilityRequestDto,
   ): Promise<ValidationRuleResult[]> {
-    const validationRules = [this.consumerClassValidationRule];
+    const validationRules = [
+      this.consumerClassValidationRule
+    ];
+
     return this.verifyRules(customerInfo, validationRules);
   }
 

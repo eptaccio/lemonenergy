@@ -3,7 +3,7 @@ import { CustomerEligibilityRequestDto } from '../dto/customer-eligibility-calc-
 
 export type ValidationRuleResult = {
   isValid: boolean;
-  reasons?: ReasonsForIneligibilityEnum[];
+  reason?: ReasonsForIneligibilityEnum;
 };
 
 export interface IValidationRule {
