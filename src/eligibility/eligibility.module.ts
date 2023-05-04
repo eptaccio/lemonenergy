@@ -12,7 +12,7 @@ import { ConsumptionCalcsHelper } from './helpers/consumption-calcs.helper';
     ...ValidationRules,
     EligibilityRulesValidatorService,
     EligibilityService,
-    ConsumptionCalcsHelper
+    ConsumptionCalcsHelper,
   ],
 })
 export class EligibilityModule {}

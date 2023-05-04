@@ -5,10 +5,10 @@ import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-ca
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 
 function buildDto(
-  tariffModality : TariffModalityEnum,
+  tariffModality: TariffModalityEnum,
 ): ProspectEligibilityRequestDto {
   return {
-    modalidadeTarifaria: tariffModality ,
+    modalidadeTarifaria: tariffModality,
   } as ProspectEligibilityRequestDto;
 }
 
@@ -29,13 +29,13 @@ describe('TariffModalityValidationRule', () => {
     describe('with valid tariff modalities', () => {
       const validTariffModalities = [
         TariffModalityEnum.CONVENCIONAL,
-        TariffModalityEnum.BRANCA
+        TariffModalityEnum.BRANCA,
       ];
 
       it('should be valid', async () => {
         for (const validTariffModality of validTariffModalities) {
           const result = await tariffModalityValidationRule.validate(
-            buildDto(validTariffModality)
+            buildDto(validTariffModality),
           );
           expect(result.isValid).toBeTruthy();
           expect(result.reason).toBeUndefined();
@@ -52,11 +52,11 @@ describe('TariffModalityValidationRule', () => {
       it('should be invalid', async () => {
         for (const validTariffModality of validTariffModalities) {
           const result = await tariffModalityValidationRule.validate(
-            buildDto(validTariffModality)
+            buildDto(validTariffModality),
           );
           expect(result.isValid).toBeFalsy();
           expect(result.reason).toEqual(
-            ReasonForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA
+            ReasonForIneligibilityEnum.MODALIDADE_TARIFARIA_NAO_ACEITA,
           );
         }
       });

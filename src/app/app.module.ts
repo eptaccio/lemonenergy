@@ -3,9 +3,7 @@ import { AppController } from './app.controller';
 import { EligibilityModule } from '../eligibility/eligibility.module';
 
 @Module({
-  imports: [
-    EligibilityModule,
-  ],
+  imports: [EligibilityModule],
   controllers: [AppController],
   providers: [],
 })

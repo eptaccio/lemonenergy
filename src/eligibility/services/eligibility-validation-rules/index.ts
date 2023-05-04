@@ -5,5 +5,5 @@ import { TariffModalityValidationRule } from './tariff-modality.validation-rule'
 export const ValidationRules = [
   TariffClassValidationRule,
   ConsumptionValuesValidationRule,
-  TariffModalityValidationRule
+  TariffModalityValidationRule,
 ];

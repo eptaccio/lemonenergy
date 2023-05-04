@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
-import {
-  ValidationRuleResult,
-} from '../../interfaces/rule-validator.interface';
+import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 import { TariffModalityEnum } from '../../constants/tariff-modality.enum';
 import { BaseValidationRule } from './abstract-base-validation-rule';
@@ -17,12 +15,12 @@ export class TariffModalityValidationRule extends BaseValidationRule {
       TariffModalityEnum.BRANCA,
     ];
 
-    const isValidTariffModality  = validTariffModalities.includes(
+    const isValidTariffModality = validTariffModalities.includes(
       prospectInfo.modalidadeTarifaria,
     );
 
-    if (isValidTariffModality ) {
-      return this.buildValidResponse()
+    if (isValidTariffModality) {
+      return this.buildValidResponse();
     }
 
     return this.buildInvalidResponse(

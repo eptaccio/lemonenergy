@@ -10,8 +10,8 @@ import { ConsumptionCalcsHelper } from '../helpers/consumption-calcs.helper';
 export class EligibilityService {
   constructor(
     private readonly eligibilityRulesValidatorService: EligibilityRulesValidatorService,
-    private readonly calcHelper: ConsumptionCalcsHelper
-  ) { }
+    private readonly calcHelper: ConsumptionCalcsHelper,
+  ) {}
 
   public async analyzeProspect(
     prospectInfo: ProspectEligibilityRequestDto,
@@ -23,7 +23,9 @@ export class EligibilityService {
     if (isClientEligible) {
       return {
         elegivel: true,
-        economiaAnualDeCO2: this.calculateCo2SavingProjection(prospectInfo.historicoDeConsumo)
+        economiaAnualDeCO2: this.calculateCo2SavingProjection(
+          prospectInfo.historicoDeConsumo,
+        ),
       };
     }
 
@@ -39,7 +41,9 @@ export class EligibilityService {
   private getIneligibilityReasons(
     validationResults: ValidationRuleResult[],
   ): ReasonForIneligibilityEnum[] {
-    const invalidResults = validationResults.filter(result => result.isValid === false)
+    const invalidResults = validationResults.filter(
+      (result) => result.isValid === false,
+    );
     return invalidResults.map((result) => result.reason);
   }
 
@@ -50,9 +54,9 @@ export class EligibilityService {
   }
 
   private calculateCo2SavingProjection(consumptionHistory: number[]): number {
-    const avgConsumption = this.calcHelper
-      .calcAverageConsumption(consumptionHistory);
+    const avgConsumption =
+      this.calcHelper.calcAverageConsumption(consumptionHistory);
 
-    return this.calcHelper.calcCO2AnnualSaving(avgConsumption)
+    return this.calcHelper.calcCO2AnnualSaving(avgConsumption);
   }
 }

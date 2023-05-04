@@ -2,19 +2,14 @@ import { Injectable } from '@nestjs/common';
 
 import { BaseValidationRule } from './abstract-base-validation-rule';
 import { ConnectionTypeEnum } from '../../constants/connection-type.enum';
-import {
-  ProspectEligibilityRequestDto,
-} from '../../dto/prospect-eligibility-calc-request.dto';
+import { ProspectEligibilityRequestDto } from '../../dto/prospect-eligibility-calc-request.dto';
 import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 import { ConsumptionCalcsHelper } from '../../helpers/consumption-calcs.helper';
- 
+
 @Injectable()
 export class ConsumptionValuesValidationRule extends BaseValidationRule {
-  
-  constructor(
-    private readonly calcHelper: ConsumptionCalcsHelper
-  ) {
+  constructor(private readonly calcHelper: ConsumptionCalcsHelper) {
     super();
   }
 

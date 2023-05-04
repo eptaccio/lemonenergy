@@ -9,10 +9,7 @@ describe('ConsumptionValuesValidationRule', () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      providers: [
-        ConsumptionValuesValidationRule,
-        ConsumptionCalcsHelper
-      ],
+      providers: [ConsumptionValuesValidationRule, ConsumptionCalcsHelper],
     }).compile();
 
     consumptionValuesValidationRule = app.get<ConsumptionValuesValidationRule>(
@@ -26,12 +23,12 @@ describe('ConsumptionValuesValidationRule', () => {
         tipoDeConexao: ConnectionTypeEnum.MONOFASICO,
         historicoDeConsumo: [450],
       } as ProspectEligibilityRequestDto;
-      
-      const result = await consumptionValuesValidationRule.validate(prospectInfo)
+
+      const result = await consumptionValuesValidationRule.validate(
+        prospectInfo,
+      );
       expect(result.isValid).toBeTruthy();
       expect(result.reason).toBeUndefined();
-    })
-
-  })
-
+    });
+  });
 });

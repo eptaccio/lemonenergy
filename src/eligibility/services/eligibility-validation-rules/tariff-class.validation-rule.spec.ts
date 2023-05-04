@@ -4,9 +4,7 @@ import { TariffClassValidationRule } from './tariff-class.validation-rule';
 import { TariffClassEnum } from '../../constants/tariff-class.enum';
 import { ReasonForIneligibilityEnum } from '../../constants/reason-for-ineligibility.enum';
 
-function buildDto(
-  tariffClass: TariffClassEnum,
-): ProspectEligibilityRequestDto {
+function buildDto(tariffClass: TariffClassEnum): ProspectEligibilityRequestDto {
   return {
     classeDeConsumo: tariffClass,
   } as ProspectEligibilityRequestDto;
@@ -36,7 +34,7 @@ describe('TariffClassValidationRule', () => {
       it('should be valid', async () => {
         for (const validTariffClass of validTariffClasses) {
           const result = await tariffClassValidationRule.validate(
-            buildDto(validTariffClass)
+            buildDto(validTariffClass),
           );
           expect(result.isValid).toBeTruthy();
           expect(result.reason).toBeUndefined();
@@ -53,7 +51,7 @@ describe('TariffClassValidationRule', () => {
       it('should be invalid', async () => {
         for (const invalidTariffClass of invalidTariffClasses) {
           const result = await tariffClassValidationRule.validate(
-            buildDto(invalidTariffClass)
+            buildDto(invalidTariffClass),
           );
           expect(result.isValid).toBeFalsy();
           expect(result.reason).toEqual(

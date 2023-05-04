@@ -2,18 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { ProspectEligibilityRequestDto } from '../dto/prospect-eligibility-calc-request.dto';
 
-import {
-  ValidationRuleResult
-} from '../interfaces/rule-validator.interface';
+import { ValidationRuleResult } from '../interfaces/rule-validator.interface';
 
-import {
-  ValidationRules
-} from './eligibility-validation-rules';
+import { ValidationRules } from './eligibility-validation-rules';
 import { BaseValidationRule } from './eligibility-validation-rules/abstract-base-validation-rule';
 
 @Injectable()
 export class EligibilityRulesValidatorService {
-  constructor(private readonly moduleRef: ModuleRef) { }
+  constructor(private readonly moduleRef: ModuleRef) {}
 
   public async validateAll(
     prospectInfo: ProspectEligibilityRequestDto,
@@ -23,8 +19,8 @@ export class EligibilityRulesValidatorService {
   }
 
   private getRules() {
-    return ValidationRules.map(
-      (rule) => this.moduleRef.get<BaseValidationRule>(rule)
+    return ValidationRules.map((rule) =>
+      this.moduleRef.get<BaseValidationRule>(rule),
     );
   }
 

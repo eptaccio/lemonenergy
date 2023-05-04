@@ -11,7 +11,8 @@ export class EligibilityController {
 
   @ApiOperation({
     summary: 'Analyze prospect eligibility',
-    description: 'Analyze prospect eligibility based at electric bill information'
+    description:
+      'Analyze prospect eligibility based at electric bill information',
   })
   @ApiBody({ type: ProspectEligibilityRequestDto })
   @ApiResponse({

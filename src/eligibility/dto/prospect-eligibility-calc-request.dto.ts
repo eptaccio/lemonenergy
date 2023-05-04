@@ -1,8 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  ArrayMaxSize, ArrayMinSize, IsArray, IsDefined,
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsDefined,
   IsEnum,
-  IsInt, Matches, Max, Min
+  IsInt,
+  Matches,
+  Max,
+  Min,
 } from 'class-validator';
 import { ConnectionTypeEnum } from '../constants/connection-type.enum';
 import { TariffClassEnum } from '../constants/tariff-class.enum';

@@ -21,5 +21,5 @@ export class ProspectEligibilityResponseDto {
   @ApiProperty({
     description: 'Year CO2 saving projection',
   })
-  public readonly economiaAnualDeCO2?: number
+  public readonly economiaAnualDeCO2?: number;
 }
