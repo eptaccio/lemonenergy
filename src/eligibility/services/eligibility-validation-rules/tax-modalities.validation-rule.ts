@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerEligibilityRequestDto } from '../dto/customer-eligibility-calc-request.dto';
+import { CustomerEligibilityRequestDto } from '../../dto/customer-eligibility-calc-request.dto';
 import {
   IValidationRule,
   ValidationRuleResult,
-} from '../interfaces/rule-validator.interface';
-import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
-import { TaxModalitiesEnum } from '../constants/tax-modalities.enum';
+} from '../../interfaces/rule-validator.interface';
+import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
+import { TaxModalitiesEnum } from '../../constants/tax-modalities.enum';
 import { BaseValidationRule } from './abstract-base-validation-rule';
 
 @Injectable()

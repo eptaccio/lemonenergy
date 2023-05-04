@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
+
+import { BaseValidationRule } from './abstract-base-validation-rule';
+import { ConnectionTypesEnum } from '../../constants/connection-types.enum';
 import {
   ConsumptionHistoryDto,
   CustomerEligibilityRequestDto,
-} from '../dto/customer-eligibility-calc-request.dto';
-import { ValidationRuleResult } from '../interfaces/rule-validator.interface';
-import { ReasonsForIneligibilityEnum } from '../constants/reasons-for-ineligibility.enum';
-import { ConnectionTypesEnum } from '../constants/connection-types.enum';
-import { BaseValidationRule } from './abstract-base-validation-rule';
+} from '../../dto/customer-eligibility-calc-request.dto';
+import { ValidationRuleResult } from '../../interfaces/rule-validator.interface';
+import { ReasonsForIneligibilityEnum } from '../../constants/reasons-for-ineligibility.enum';
 
 @Injectable()
 export class ConsumptionValuesValidationRule extends BaseValidationRule {
@@ -34,8 +35,11 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
       minAvgValue,
     );
 
-    return this.buildResult(
-      isValidConsumption,
+    if (isValidConsumption) {
+      return this.buildValidResponse();
+    }
+
+    return this.buildInvalidResponse(
       ReasonsForIneligibilityEnum.CONSUMO_MUITO_BAIXO_PARA_TIPO_DE_CONEXAO,
     );
   }
