@@ -10,7 +10,7 @@ import { ConsumptionCalcsHelper } from '../helpers/consumption-calcs.helper';
 export class EligibilityService {
   constructor(
     private readonly eligibilityRulesValidatorService: EligibilityRulesValidatorService,
-    private readonly calcHelper: ConsumptionCalcsHelper,
+    private readonly consumptionCalcsHelper: ConsumptionCalcsHelper,
   ) {}
 
   public async analyzeProspect(
@@ -55,8 +55,8 @@ export class EligibilityService {
 
   private calculateCo2SavingProjection(consumptionHistory: number[]): number {
     const avgConsumption =
-      this.calcHelper.calcAverageConsumption(consumptionHistory);
+      this.consumptionCalcsHelper.calcAverageConsumption(consumptionHistory);
 
-    return this.calcHelper.calcCO2AnnualSaving(avgConsumption);
+    return this.consumptionCalcsHelper.calcCO2AnnualSaving(avgConsumption);
   }
 }

@@ -9,7 +9,7 @@ import { ConsumptionCalcsHelper } from '../../helpers/consumption-calcs.helper';
 
 @Injectable()
 export class ConsumptionValuesValidationRule extends BaseValidationRule {
-  constructor(private readonly calcHelper: ConsumptionCalcsHelper) {
+  constructor(private readonly consumptionCalcsHelper: ConsumptionCalcsHelper) {
     super();
   }
 
@@ -47,7 +47,7 @@ export class ConsumptionValuesValidationRule extends BaseValidationRule {
     consumptionHistory: number[],
     minAverageConsumptionValue: number,
   ) {
-    const avg = this.calcHelper.calcAverageConsumption(consumptionHistory);
+    const avg = this.consumptionCalcsHelper.calcAverageConsumption(consumptionHistory);
     return avg > minAverageConsumptionValue;
   }
 }

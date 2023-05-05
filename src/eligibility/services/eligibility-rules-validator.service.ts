@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { ProspectEligibilityRequestDto } from '../dto/prospect-eligibility-calc-request.dto';
 
@@ -14,11 +14,11 @@ export class EligibilityRulesValidatorService {
   public async validateAll(
     prospectInfo: ProspectEligibilityRequestDto,
   ): Promise<ValidationRuleResult[]> {
-    const validationRules = this.getRules();
+    const validationRules = this.getValidationsRules();
     return this.verifyRules(prospectInfo, validationRules);
   }
 
-  private getRules() {
+  private getValidationsRules() {
     return ValidationRules.map((rule) =>
       this.moduleRef.get<BaseValidationRule>(rule),
     );
@@ -28,8 +28,13 @@ export class EligibilityRulesValidatorService {
     prospectInfo: ProspectEligibilityRequestDto,
     rules: BaseValidationRule[],
   ): Promise<ValidationRuleResult[]> {
-    const pendingValidations = rules.map((rule) => rule.validate(prospectInfo));
-    const validationResults = await Promise.all(pendingValidations);
-    return validationResults;
+    try {
+      const pendingValidations = rules.map((rule) => rule.validate(prospectInfo));
+      const validationResults = await Promise.all(pendingValidations);
+      return validationResults;
+    } catch (error) {
+     throw new BadRequestException('Error running eligibility-validation-rules', error) 
+    }
   }
+  
 }
