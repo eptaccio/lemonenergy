@@ -21,7 +21,7 @@ describe('EligibilityService', () => {
     eligibilityService = app.get<EligibilityService>(EligibilityService);
   });
 
-  describe('when analyzing a prospect with all pre-requisites', () => {
+  describe('when analyzing a prospect with pre-requisites', () => {
     const prospectEligibilityRequest = {
       numeroDoDocumento: '14041737706',
       tipoDeConexao: 'bifasico',
@@ -36,6 +36,32 @@ describe('EligibilityService', () => {
       const expectedResponse = {
         elegivel: true,
         economiaAnualDeCO2: 5553.24,
+      };
+      const result = await eligibilityService.analyzeProspect(
+        prospectEligibilityRequest,
+      );
+      expect(result).toEqual(expectedResponse);
+    });
+  });
+
+  describe('when analyzing a prospect with invalids TariffClassEnum (classe de consumo) and TariffModalityEnum (modalidade tarifaria)', () => {
+    const prospectEligibilityRequest = {
+      numeroDoDocumento: '14041737706',
+      tipoDeConexao: 'bifasico',
+      classeDeConsumo: 'rural',
+      modalidadeTarifaria: 'verde',
+      historicoDeConsumo: [
+        3878, 9760, 5976, 2797, 2481, 5731, 7538, 4392, 7859, 4160,
+      ],
+    } as ProspectEligibilityRequestDto;
+
+    it('should return a invalid response with ReasonForIneligibilityEnum (razoesInelegibilidade)', async () => {
+      const expectedResponse = {
+        elegivel: false,
+        razoesDeInelegibilidade: [
+          'Classe de consumo não aceita',
+          'Modalidade tarifária não aceita',
+        ],
       };
       const result = await eligibilityService.analyzeProspect(
         prospectEligibilityRequest,
