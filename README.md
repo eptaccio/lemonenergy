@@ -2,7 +2,7 @@
 Analyze the information available in the consumption history and tariff modes to define prospect eligibility
 
 ## Docs
-Run the app then to /docs
+Run the app then go to /docs
 
 ## Installation
 
