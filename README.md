@@ -1,5 +1,8 @@
 ## eligibility-api
+Analyze the information available in the consumption history and tariff modes to define prospect eligibility
 
+## Docs
+Run the app then to /docs
 
 ## Installation
 
@@ -20,14 +23,16 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+### Running the app (with docker-compose)
+```bash
+docker-compose up
+```
+
 ## Test
 
 ```bash
 # unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
